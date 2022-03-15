@@ -3,7 +3,7 @@ local constants = require "kong.constants"
 local cjson = require("cjson")
 local socket = require "socket"
 
-local JwtKeycloakHandler = BasePlugin:extend()
+local CustomHandler = BasePlugin:extend()
 
 local priority_env_var = "AUTHENTICATION_MARKER_PRIORITY"
 local priority
@@ -16,12 +16,6 @@ kong.log.debug('AUTHENTICATION_MARKER_PRIORITY: ' .. priority)
 
 CustomHandler.PRIORITY = priority
 CustomHandler.VERSION = "1.1.0"
-
-
-local CustomHandler = {
-    VERSION  = "1.0.0"
-    PRIORITY = 10
-}
 
 function CustomHandler:init_worker()
 -- Implement logic for the init_worker phase here (http/stream)

@@ -6,8 +6,7 @@ return {
     { config = {
         type = "record",
         fields = {
-          { text = { type = "string", default = "Hey" }, }
-
+          { text = { type = "string", default = "Hey" } }
         },
       },
     },

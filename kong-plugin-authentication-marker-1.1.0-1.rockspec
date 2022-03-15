@@ -23,7 +23,7 @@ dependencies = {
 build = {
   type = "builtin",
   modules = {
-    ["kong.plugins.jwt-keycloak.handler"] = "src/handler.lua",
-    ["kong.plugins.jwt-keycloak.schema"]  = "src/schema.lua",
+    ["kong.plugins.kong-plugin-authentication-marker.handler"] = "src/handler.lua",
+    ["kong.plugins.kong-plugin-authentication-marker.schema"]  = "src/schema.lua",
   }
 }
