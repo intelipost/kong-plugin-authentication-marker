@@ -2,6 +2,7 @@ local BasePlugin = require "kong.plugins.base_plugin"
 local constants = require "kong.constants"
 local cjson = require("cjson")
 local socket = require "socket"
+local jwt = require "resty.jwt"
 
 local CustomHandler = BasePlugin:extend()
 
@@ -41,9 +42,14 @@ end
 
 function CustomHandler:access(config)
 kong.service.request.add_header("authentication-method", "jwt")
+local key = "ABC123"
+local table_of_jwt = {}
+table_of_jwt["header"] = { "typ": "JWT", "alg": "HS512" }
+table_of_jwt["payload"] = {"foo": "bar"}
+local jwt_token = jwt:sign(key, table_of_jwt)
 
 -- Implement logic for the rewrite phase here (http)
-kong.log("access add header authentication-method")
+kong.log("access add header authentication-method jwt " .. jwt_token) 
 end
 
 function CustomHandler:header_filter(config)
