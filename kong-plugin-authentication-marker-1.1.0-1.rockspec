@@ -10,7 +10,7 @@ supported_platforms = {"linux", "macosx"}
 
 source = {
   url = "git://github.com/intelipost/kong-plugin-authentication-marker",
-  tag = "v1.1.0",
+  tag = "master",
 }
 description = {
   summary = "A Kong plugin that will validate tokens issued by keycloak",
