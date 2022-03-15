@@ -40,8 +40,10 @@ kong.log("rewrite")
 end
 
 function CustomHandler:access(config)
+kong.service.request.add_header("authentication-method", "jwt")
+
 -- Implement logic for the rewrite phase here (http)
-kong.log("access")
+kong.log("access add header authentication-method")
 end
 
 function CustomHandler:header_filter(config)
