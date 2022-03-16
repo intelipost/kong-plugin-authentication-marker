@@ -104,7 +104,7 @@ end
 kong.log.debug("Start decoding " .. token) 
 local jwt_decoded, err
 if token then
-    jwt_decoded, err = jwt_decoder:new(token)
+    jwt_decoded, err = jwt:load_jwt(token)
     if err then
         return false, { status = 401, message = "Bad token; " .. tostring(err) }
     end
