@@ -115,8 +115,9 @@ local key = "ABC123"
 
 local new_jwt = {}
 new_jwt.header = {typ = "JWT", alg = "RS256"}
-new_jwt.payload = jwt_decoded["payload"]
-new_jwt.payload[chris] = {foo = "bar"}
+kong.log.debug("Payload " .. dump(jwt_decoded["payload"]))
+new_jwt[payload] = jwt_decoded["payload"]
+-- new_jwt.payload[chris] = {foo = "bar"}
 local jwt_token = jwt:sign(key, new_jwt)
 
 kong.log.debug("Signed " .. dump(jwt_token))
