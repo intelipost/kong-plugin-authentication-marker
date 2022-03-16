@@ -64,6 +64,20 @@ local function retrieve_token(conf)
     end
 end
 
+function dump(o)
+    if type(o) == 'table' then
+       local s = '{ '
+       for k,v in pairs(o) do
+          if type(k) ~= 'number' then k = '"'..k..'"' end
+          s = s .. '['..k..'] = ' .. dump(v) .. ','
+       end
+       return s .. '} '
+    else
+       return tostring(o)
+    end
+ end
+ 
+
 function CustomHandler:access(config)
 kong.service.request.add_header("authentication-method", "jwt")
 
@@ -96,9 +110,9 @@ if token then
     end
 end
 
-kong.log.debug("Decoded " )
+kong.log.debug("Decoded " .. dump(jwt_decoded))
 local key = "ABC123"
-jwt_decoded["chris"] = {foo = "bar"}
+jwt_decoded.insert(chris, {foo = "bar"})
 local jwt_token = jwt:sign(key, jwt_decoded)
 
 -- Implement logic for the rewrite phase here (http)
