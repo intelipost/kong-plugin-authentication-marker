@@ -125,6 +125,9 @@ local jwt_token = jwt:sign(key, new_jwt)
 kong.log.debug("Signed " .. dump(jwt_token))
 -- Implement logic for the rewrite phase here (http)
 kong.log.debug("access add header authentication-method jwt " .. dump(jwt_token)) 
+
+kong.service.request.set_header("Authorization", "Bearer " .. jwt_token)
+
 end
 
 function CustomHandler:header_filter(config)
