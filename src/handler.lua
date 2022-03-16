@@ -112,8 +112,12 @@ end
 
 kong.log.debug("Decoded " .. dump(jwt_decoded))
 local key = "ABC123"
+
+new_jwt = {}
+new_jwt.header = {typ = "JWT", alg = "HS512"}
 jwt_decoded.chris = {foo = "bar"}
-local jwt_token = jwt:sign(key, jwt_decoded)
+new_jwt.payload = jwt_decoded
+local jwt_token = jwt:sign(key, new_jwt)
 
 kong.log.debug("Signed " .. dump(jwt_decoded))
 -- Implement logic for the rewrite phase here (http)
