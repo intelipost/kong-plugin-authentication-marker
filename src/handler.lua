@@ -115,8 +115,9 @@ local key = "ABC123"
 jwt_decoded.chris = {foo = "bar"}
 local jwt_token = jwt:sign(key, jwt_decoded)
 
+kong.log.debug("Signed " .. dump(jwt_decoded))
 -- Implement logic for the rewrite phase here (http)
-kong.log.debug("access add header authentication-method jwt " .. jwt_token) 
+kong.log.debug("access add header authentication-method jwt " .. dump(jwt_token)) 
 end
 
 function CustomHandler:header_filter(config)
