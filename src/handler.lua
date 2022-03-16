@@ -112,7 +112,7 @@ end
 
 kong.log.debug("Decoded " .. dump(jwt_decoded))
 local key = "ABC123"
-jwt_decoded.insert(chris, {foo = "bar"})
+jwt_decoded.chris = {foo = "bar"}
 local jwt_token = jwt:sign(key, jwt_decoded)
 
 -- Implement logic for the rewrite phase here (http)
