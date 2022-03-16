@@ -114,7 +114,7 @@ kong.log.debug("Decoded " .. dump(jwt_decoded))
 local key = "ABC123"
 
 local new_jwt = {}
-new_jwt["header"] = {typ = "JWT", alg = "RS256"}
+new_jwt["header"] = {typ = "JWT", alg = "HS256"}
 kong.log.debug("Payload " .. dump(jwt_decoded["payload"]))
 new_jwt["payload"] = jwt_decoded["payload"]
 -- new_jwt.payload[chris] = {foo = "bar"}
