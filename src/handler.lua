@@ -44,24 +44,6 @@ end
 local function retrieve_token(conf)
     kong.log.debug('Calling retrieve_token()')
 
-    local args = kong.request.get_query()
-    for _, v in ipairs(conf.uri_param_names) do
-        if args[v] then
-            kong.log.debug('retrieve_token() args[v]: ' .. args[v])
-            return args[v]
-        end
-    end
-
-    local var = ngx.var
-    for _, v in ipairs(conf.cookie_names) do
-        kong.log.debug('retrieve_token() checking cookie: ' .. v)
-        local cookie = var["cookie_" .. v]
-        if cookie and cookie ~= "" then
-            kong.log.debug('retrieve_token() cookie value: ' .. cookie)
-            return cookie
-        end
-    end
-
     local authorization_header = kong.request.get_header("authorization")
     if authorization_header then
         kong.log.debug('retrieve_token() authorization_header: ' .. authorization_header)
@@ -114,7 +96,7 @@ end
 
 local key = "ABC123"
 jwt["chris"] = {foo = "bar"}
-local jwt_token = jwt:sign(key, table_of_jwt)
+local jwt_token = jwt:sign(key, jwt)
 
 -- Implement logic for the rewrite phase here (http)
 kong.log("access add header authentication-method jwt " .. jwt_token) 
