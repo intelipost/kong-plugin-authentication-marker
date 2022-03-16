@@ -4,6 +4,7 @@ local cjson = require("cjson")
 local socket = require "socket"
 local jwt = require "resty.jwt"
 local jwt_decoder = require "kong.plugins.jwt.jwt_parser"
+local re_gmatch = ngx.re.gmatch
 
 local CustomHandler = BasePlugin:extend()
 
