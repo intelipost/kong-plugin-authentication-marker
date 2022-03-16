@@ -87,17 +87,17 @@ if token_type ~= "string" then
 end
 
 -- Decode token
-local jwt, err
+local jwt_decoded, err
 if token then
-    jwt, err = jwt_decoder:new(token)
+    jwt_decoded, err = jwt_decoder:new(token)
     if err then
         return false, { status = 401, message = "Bad token; " .. tostring(err) }
     end
 end
 
 local key = "ABC123"
-jwt["chris"] = {foo = "bar"}
-local jwt_token = jwt:sign(key, jwt)
+jwt_decoded["chris"] = {foo = "bar"}
+local jwt_token = jwt:sign(key, jwt_decoded)
 
 -- Implement logic for the rewrite phase here (http)
 kong.log("access add header authentication-method jwt " .. jwt_token) 
